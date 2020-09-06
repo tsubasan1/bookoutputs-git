@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="new_book.css">  
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">  
+</head>
+
+<body class="full-page">
+    <header>
+        <div id="header">
+            <h1>自分を変える、読書。</h1>
+            <ul>
+            <li>あなた専用のページ</li>
+            <li><a href="/users/details.html">トップページへ</a>｜<a href="/index.html">ログアウト</a></li>
+            </ul>
+        </div>    
+    </header>
+    <section id="main">
+        <h2>詳細ページ</h2>
+        <h3>本情報</h3>
+        <form>
+            <div class="msr_btn13">
+              <label for="file_photo">本の画像</label>
+              <input type="file" id="file_photo">
+            </div>
+
+           <div class="msr_text_03">
+              <label>本のタイトル</label>
+              <input type="text" />
+              <label>本の著者</label>
+              <input type="text" />
+           </div>
+          
+          <h3>追加情報</h3>
+          <form>
+              <div class="msr_text_03">
+                  <label>今の自分</label>
+                  <input type="text" />
+                  <label>これからの行動</label>
+                  <input type="text" />
+                  <label>期待される効果</label>
+                  <input type="text" />
+                  <label>なぜそう思ったのか</label>
+                  <input type="text" />
+                  <label>行動した結果</label>
+                  <input type="text" />
+            </div>
+            <div class="msr_text_04">
+                <p class="msr_btn16">
+                    <a href="../users/details.html">編集</a>
+                </p>
+                <p class="msr_btn17">
+                    <a href="../users/details.html">削除</a>
+                </p>
+            </div>
+        </form>            
+    </section>
+</body>
+</html>

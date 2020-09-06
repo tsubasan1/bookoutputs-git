@@ -1,0 +1,39 @@
+{{-- ナビゲーションバー --}}
+@include('commons.navbar')
+
+<body class="full-page">
+
+    <section id="main">
+        <img src="../bookimg/ユーザー詳細ページ.jpeg" width="100%">
+        <h2>新しく本情報＋リストを作成する</h2>
+        <p class="msr_btn13">
+            <a href="../users/new_book.html">こんな本、読むよ。</a>
+        </p>
+        <h2>リストを選択する</h2>
+        <p class="msr_btn13">
+            <a href="../users/select_checklists.html">自分のここ、変えるよ。</a>
+        </p>
+        <h2>ユーザーの投稿一覧</h2>
+        <h3>行動を変える読書</h3>
+
+        <div class="content-1">
+            <div class="card" style="width: 18rem;" >
+                <img src="../bookimg/本.jpeg" class="card-img-top" alt="..." width="200px">
+                <div class="card-body">
+                    <h5 class="card-title">本のタイトル</h5>
+                    <p class="card-text"></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">本の著者</li>
+                    <li class="list-group-item">今の自分</li>
+                    <li class="list-group-item">これからの自分</li>
+                    <li class="list-group-item">行動した結果</li>
+                </ul>
+                <div class="card-body">
+                    <a href="../users/book_details.html" class="card-link">詳細ページへ</a>
+                </div>
+            </div>
+
+    </section>
+</body>
+</html>

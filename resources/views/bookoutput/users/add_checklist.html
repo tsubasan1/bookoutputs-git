@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="new_book.css">  
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">  
+</head>
+
+<body class="full-page">
+    <header>
+        <div id="header">
+            <h1>自分を変える、読書。</h1>
+            <ul>
+            <li>あなた専用のページ</li>
+            <li><a href="../users/details.html">トップページへ</a>｜<a href="/index.html">ログアウト</a></li>
+            </ul>
+        </div>    
+    </header>
+    <section id="main">
+        <h2>リスト作成</h2>
+        <h3>本情報</h3>
+        <div class="content-1">
+          <div class="card" style="width: 18rem;" >
+              <img src="../bookimg/本.jpeg" class="card-img-top" alt="..." width="200px">
+              <div class="card-body">
+                  <h5 class="card-title">本のタイトル</h5>
+                  <p class="card-text"></p>
+              </div>
+              <ul class="list-group list-group-flush">
+                  <li class="list-group-item">本の著者</li>
+              </ul>
+          </div>
+  
+        <h3>自分のここを変えたい！</h3>
+
+        <form>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        </head>
+        <body>
+        
+        
+        <script type="text/javascript">
+        
+        $(function() {
+        
+          $('button#add').click(function(){
+        
+          var tr_form = '' +
+          '<tr>' +
+            '<td><input type="text" name="text[]"></td>' +
+          '</tr>';
+        
+         $(tr_form).appendTo($('table > tbody'));
+        });        
+        });
+        </script> 
+        <form action="data.php" method="post" enctype="multipart/form-data"> 
+        <table>
+          <thead>
+            <tr>
+              <td>例：早起きしたい！</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" name="text[]"></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td ><button id="add" type="button">追加</button></td>
+            </tr>
+          </tfoot>
+        </table>
+        </form>
+             <p class="msr_btn13">
+              <a href="../users/details.html">リスト追加</a>
+            </p>
+        </form>            
+
+    </section>
+</body>
+</html>
