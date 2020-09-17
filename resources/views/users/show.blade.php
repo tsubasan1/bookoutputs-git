@@ -1,12 +1,10 @@
 {{-- ナビゲーションバー --}}
 @include('commons.navbar')
-<!DOCTYPE html>
-<html lang="ja">
     <head>
         <link rel="stylesheet" type="text/css" href="/css/welcome.css">
     </head>
     <body class="full-page">
-        <div class="class="offset-md-3 col-md-7">
+        <div class="class="offset-md-4 col-md-6">
                   <img src="{{ $book->image_path }}" width="60%">
             <table class="table">
               <thead>

@@ -7,6 +7,9 @@
     </head>
     <body class="full-page">
         <section id="main">
+            {{-- エラーメッセージ --}}
+            @include('commons.error_messages')
+
             <h2>リスト情報追加</h2>
                 <h3>選択した本</h3>
                 <div class="row">

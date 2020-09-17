@@ -82,6 +82,9 @@ class ChangesController extends Controller
 
        // バリデーション
         $request->validate([
+            'image'=>'required',
+            'title' => 'required|max:255',
+            'auther' => 'required|max:255',
             'now' => 'required|max:255',
             'future' => 'required|max:255',
             'effect' => 'required|max:255',
@@ -91,6 +94,8 @@ class ChangesController extends Controller
         
         // idの値でchangeを検索して取得
         $change = \App\Change::findOrFail($id);
+        $book = \App\Book::findOrFail($id);
+        
         $book = $change->checklist->book;
         // 認証済みユーザ（閲覧者）がその本情報の所有者である場合は、
         if (\Auth::id() === $book->user_id) {
@@ -101,10 +106,15 @@ class ChangesController extends Controller
         // バケットの`image-hozon`フォルダへアップロード
         $path = \Storage::disk('s3')->putFile('image-hozon', $image, 'public');
         // アップロードした画像のフルパスを取得
+        if ($request->hasFile('image_path')) {
         $book->image_path = \Storage::disk('s3')->url($path);
+        }
+        if ($request->has('title')) {
         $book->title = $request->title;
+        }
+        if ($request->has('auther')) {
         $book->auther = $request->auther;
-
+        }
         $change->now = $request->now;
         $change->future = $request->future;
         $change->effect = $request->effect;
@@ -117,7 +127,8 @@ class ChangesController extends Controller
 
         // トップページへリダイレクトさせる
         return redirect('/');
-   }
+
+    }
 
     // deleteでchanges/idにアクセスされた場合の「削除処理」
     public function destroy($id)

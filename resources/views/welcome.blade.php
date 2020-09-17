@@ -25,26 +25,22 @@
         <h3>行動を変える読書</h3>
                 
         <div class="content-1">
-            <div class="row">
+          <div class="row">
             @foreach($books as $book)
               @foreach($book->checklists as $checklist)
                 @foreach($checklist->changes as $change)
                 <div class="offset-md-1 col-md-4">
-                          <img src="{{ $book->image_path }}" class="card-img-top" >
+                  <img src="{{ $book->image_path }}" width="60%">
                     <table class="table">
                       <thead>
                         <tr>
                           <th scope="row">本のタイトル</th>
                           <td scope="row">{{ $book->title }}</td>
                         </tr>
-                      </thead>
-                      <tbody>
                         <tr>
                           <th scope="row">本の著者</th>
                           <td>{{ $book->auther }}</td>
                         </tr>
-                      </tbody>
-                      <tbody>
                         <tr>
                           <th scope="row">今の自分</th>
                           <td>{{ $change->now }}</td>
@@ -54,35 +50,86 @@
                           <td>{{ $change->future }}</td>
                         </tr>
                         <tr>
+                          <th scope="row">期待される効果</th>
+                          <td>{{ $change->effect }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">なぜそう思ったのか</th>
+                          <td>{{ $change->why }}</td>
+                        </tr>
+                        <tr>
                           <th scope="row">行動した結果</th>
                           <td>{{ $change->result }}</td>
                         </tr>
-                      </tbody>  
+                      </tbody> 
                     </table>
-                    <div class="card-body">
                         {{-- 詳細ページへのリンク --}}
                         {!! link_to_route('changes.show', '詳細ページへ', ['change' => $change->id]) !!}
-                    </div>
                 </div>
                 @endforeach
               @endforeach
             @endforeach
-            </div>            
-        </di>
+          </div>
+        </div>
 @else
 {{-- ナビゲーションバー --}}
 @include('commons.navbar')
 
-
     <body class="full-page">
-
         <section class="main-visual">
             <img src="{{ asset('image/toppage.jpeg') }}" width="60%">
         </section>
-
         <section id="main">
         <h2>投稿一覧</h2>
         <h3>行動を変える読書</h3>
+        <div class="content-1">
+          <div class="row">
+            @foreach($books as $book)
+              @foreach($book->checklists as $checklist)
+                @foreach($checklist->changes as $change)
+                <div class="offset-md-1 col-md-4">
+                  <img src="{{ $book->image_path }}" width="60%">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="row">本のタイトル</th>
+                          <td scope="row">{{ $book->title }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">本の著者</th>
+                          <td>{{ $book->auther }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">今の自分</th>
+                          <td>{{ $change->now }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">これからの自分</th>
+                          <td>{{ $change->future }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">期待される効果</th>
+                          <td>{{ $change->effect }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">なぜそう思ったのか</th>
+                          <td>{{ $change->why }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">行動した結果</th>
+                          <td>{{ $change->result }}</td>
+                        </tr>
+                      </tbody> 
+                    </table>
+            </div>
+                @endforeach
+              @endforeach
+            @endforeach
+          </div>
+        </div>
+
+        
+        
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>

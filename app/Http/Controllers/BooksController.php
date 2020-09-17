@@ -23,10 +23,21 @@ class BooksController extends Controller
             'user' => $user,
             'books' => $books,
         ];
+         // メッセージ一覧ビューでそれを表示
+        return view('welcome', $data, [
+            'user' => $user,
+            'books' => $books,
+        ]);
+    }else{
+    {        // メッセージ一覧を取得
+        $books = Book::paginate(5);
+
+        // メッセージ一覧ビューでそれを表示
+        return view('welcome', $data, [
+            'books' => $books,
+        ]);
     }
-    // Welcomeビューでそれらを表示
-    return view('welcome', $data);
-    
+    }
     }
        // getでnewbooks/にアクセスされた場合の「一覧表示処理」
     public function index2()
@@ -150,10 +161,15 @@ class BooksController extends Controller
         // バケットの`image-hozon`フォルダへアップロード
         $path = \Storage::disk('s3')->putFile('image-hozon', $image, 'public');
         // アップロードした画像のフルパスを取得
+        if ($request->hasFile('image_path')) {
         $book->image_path = \Storage::disk('s3')->url($path);
+        }
+        if ($request->has('title')) {
         $book->title = $request->title;
+        }
+        if ($request->has('auther')) {
         $book->auther = $request->auther;
-
+        }
         $change->now = $request->now;
         $change->future = $request->future;
         $change->effect = $request->effect;

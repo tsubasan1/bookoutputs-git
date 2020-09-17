@@ -1,0 +1,16 @@
+
+$user = User::first()
+$book = $user->books()->first()
+$checklist = $book->checklists()->first()
+$change = $checklist->changes()->first()
+
+User::create([
+... 'name' => 'test',
+... 'email' => 'test@test.com',
+... 'password' => Hash::make('testtest') ])
+$user->books()->create(['image_path' =>'/booking/本.jpeg','title'=>'アウトプット大全','auther'=> '樺沢さん'])
+$book->checklists()->create(['checklist' =>'記憶に残る勉強がしたい！'])
+$checklist->changes()->create(['now'=>'インプットばかり','future'=>'アウトプットをする','effect'=> '記憶に残りやすくなる','why'=> '自分の頭を使うと効果を発揮すると感じた','result'=> '記憶に残りやすくなった'])
+
+$user->books()->create(['image_path' =>'/booking/本.jpeg','title'=>'アウトプット大全','auther'=> '樺沢さん'])
+Storage::disk('s3')->putFile('myprefix', $image, 'public');

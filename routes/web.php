@@ -24,8 +24,8 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('books', 'BooksController', ['only' => ['index', 'show', 'create', 'store', 'edit',  'update', 'destroy']]);
+    Route::resource('books', 'BooksController', ['only' => ['index', 'show', 'create', 'store', 'edit', 'destroy']]);
     Route::resource('checklists', 'ChecklistsController', ['only' => ['index', 'show' , 'store' , 'create', 'store']]);
-    Route::resource('changes', 'ChangesController', ['only' => ['show','create', 'store', 'edit', 'destroy']]);
+    Route::resource('changes', 'ChangesController', ['only' => ['show','create', 'store', 'edit',  'update', 'destroy']]);
     Route::get('newbooks', 'BooksController@index2')->name('newbooks.index2');
 });
