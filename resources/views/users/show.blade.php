@@ -1,9 +1,6 @@
-{{-- ナビゲーションバー --}}
-@include('commons.navbar')
-    <head>
-        <link rel="stylesheet" type="text/css" href="/css/welcome.css">
-    </head>
-    <body class="full-page">
+@extends('layouts.app')
+
+@section('content')
         <div class="class="offset-md-4 col-md-6">
                   <img src="{{ $book->image_path }}" width="60%">
             <table class="table">
@@ -51,5 +48,5 @@
             <input type="submit" value="削除">
             </p>
             {!! Form::close() !!}
-    </body>
-</html>
+  
+@endsection

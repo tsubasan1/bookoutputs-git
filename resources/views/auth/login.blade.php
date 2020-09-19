@@ -1,16 +1,16 @@
-{{-- ナビゲーションバー --}}
-@include('commons.navbar')
-
 <!DOCTYPE html>
 <html lang="ja">
     <head>
         <meta charset="UTF-8">
         <title>BookApp</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/log_in.css">
     </head>
 
     <body class="full-page">
+        {{-- ナビゲーションバー --}}
+        @include('commons.navbar')
         <div class="form-wrapper">
             <h1>ログインページ</h1>
             

@@ -86,6 +86,7 @@ class BooksController extends Controller
     {
         // バリデーション
         $request->validate([
+            'image'=>'required',
             'title' => 'required|max:255',
             'auther' => 'required|max:255',
         ]);
@@ -107,7 +108,6 @@ class BooksController extends Controller
         // トップページへリダイレクトさせる
         return redirect('/');
     }
-    
         // getでchanges/id/editにアクセスされた場合の「更新画面表示処理」
     public function edit($id)
     {
@@ -122,7 +122,6 @@ class BooksController extends Controller
             'change' => $change,
         ]);
         }
-
         // トップページへリダイレクトさせる
         return redirect('/');
 
@@ -134,56 +133,6 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-        // putまたはpatchでchanges/idにアクセスされた場合の「更新処理」
-    public function update(Request $request, $id)
-   {
-
-       // バリデーション
-        $request->validate([
-            'title' => 'required|max:255',
-            'auther' => 'required|max:255',
-            'now' => 'required|max:255',
-            'future' => 'required|max:255',
-            'effect' => 'required|max:255',
-            'why' => 'required|max:255',
-            'result' => 'required|max:255',
-        ]);
-        
-        // idの値でchangeを検索して取得
-        $change = \App\Change::findOrFail($id);
-        $book = $change->checklist->book;
-        // 認証済みユーザ（閲覧者）がその本情報の所有者である場合は、
-        if (\Auth::id() === $book->user_id) {
-        // 本情報を更新
-  
-        //s3アップロード開始
-        $image = $request->file('image');
-        // バケットの`image-hozon`フォルダへアップロード
-        $path = \Storage::disk('s3')->putFile('image-hozon', $image, 'public');
-        // アップロードした画像のフルパスを取得
-        if ($request->hasFile('image_path')) {
-        $book->image_path = \Storage::disk('s3')->url($path);
-        }
-        if ($request->has('title')) {
-        $book->title = $request->title;
-        }
-        if ($request->has('auther')) {
-        $book->auther = $request->auther;
-        }
-        $change->now = $request->now;
-        $change->future = $request->future;
-        $change->effect = $request->effect;
-        $change->why = $request->why;
-        $change->result = $request->result;
-        
-        $book->save();
-        $change->save();
-        }
-
-        // トップページへリダイレクトさせる
-        return redirect('/');
-
-    }
     // deleteでbooks/idにアクセスされた場合の「削除処理」
     public function destroy($id)
     {

@@ -5,22 +5,18 @@
         <title>BookApp</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/welcome.css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('/css/welcome.css') }}">
     </head>
 
-    <body>
-        <body class="full-page">
         {{-- ナビゲーションバー --}}
         @include('commons.navbar')
 
-    </body>
+    <body class="full-page">
 
+        {{-- エラーメッセージ --}}
+        @include('commons.error_messages')
 
-        <div class="container">
-            {{-- エラーメッセージ --}}
-            @include('commons.error_messages')
-
-        </div>
+        @yield('content')
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
