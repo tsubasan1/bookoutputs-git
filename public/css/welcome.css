@@ -73,8 +73,18 @@
 /*--------------------------------------
 new-bookで使用
 ---------------------------------------*/
+table th{
+  padding : 20px 10px;
+  background: #f3fcff;
+}
 
-
+table td{
+  padding : 20px 10px;
+  background: #fff;
+}
+th,td{
+  border:solid 1px #aaaaaa;
+}
 /*--------------------------------------
 テキスト
 ---------------------------------------*/
@@ -313,10 +323,11 @@ new-bookで使用
   
     .msr_btn19{
     height:53px;
-    padding-top:1px;
+    padding-top:15px;
   }
   .msr_btn19 a{
     width:  18rem;
+    margin-top:30px;
     padding:15px;
     color:#ffffff;
     font-size: 15px;
@@ -324,7 +335,6 @@ new-bookで使用
     text-align: center;
     text-decoration: none;
     background: orange;
-    
     position:relative;
     -webkit-border-radius: 12px;
     -moz-border-radius: 12px;

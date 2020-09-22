@@ -17,7 +17,7 @@ class BooksController extends Controller
         // 認証済みユーザを取得
         $user = \Auth::user();
         // ユーザの投稿の一覧を作成日時の降順で取得
-        $books = $user->books()->orderBy('created_at', 'desc')->paginate(10);
+        $books = $user->books()->orderBy('created_at', 'desc')->paginate(6);
 
         $data = [
             'user' => $user,
@@ -30,11 +30,13 @@ class BooksController extends Controller
         ]);
     }else{
     {        // メッセージ一覧を取得
-        $books = Book::paginate(5);
+        
+        $books = Book::orderBy('created_at', 'desc')->paginate(6);
 
         // メッセージ一覧ビューでそれを表示
         return view('welcome', $data, [
             'books' => $books,
+            
         ]);
     }
     }
@@ -48,7 +50,7 @@ class BooksController extends Controller
         // 認証済みユーザを取得
         $user = \Auth::user();
         // ユーザの投稿の一覧を作成日時の降順で取得
-        $books = $user->books()->orderBy('created_at', 'desc')->paginate(10);
+        $books = $user->books()->orderBy('created_at', 'desc')->paginate(6);
 
         $data = [
             'user' => $user,

@@ -17,11 +17,11 @@ class ChecklistsController extends Controller
         // 認証済みユーザを取得
         $user = \Auth::user();
         // ユーザの投稿の一覧を作成日時の降順で取得
-        $books = $user->books()->orderBy('created_at', 'desc')->paginate(10);
+        $checklists = $user->books()->checklists()->orderBy('created_at', 'desc')->paginate(6);
 
         $data = [
             'user' => $user,
-            'books' => $books,
+            'checklists' => $checklists,
             
         ];
     }

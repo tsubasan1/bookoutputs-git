@@ -2,15 +2,16 @@
 
 @section('content')
     <section id="main">
-        <h2>本情報一覧</h2>
+        <h2>私が読んだ本の一覧</h2>
+        <h3>この中から1冊選んで、あなたが感動したことを記録しよう！</h3>
             <div class="content-1">
               <div class="row">
                 @foreach($books as $book)
-                    <div class="offset-md-1 col-md-4">
+                    <div class="col-md-6">
                         @include('commons.book_infomation')
                         <p class="msr_btn19">
                             {{-- リスト追加へのリンク--}}
-                        {!! link_to_route('books.show', 'この本のリストを追加する', ['book' => $book->id])!!}
+                        {!! link_to_route('books.show', '私はここに、感動したよ。', ['book' => $book->id])!!}
                             {{-- 本情報削除フォーム --}}
                         {!! Form::model($book, ['route' => ['books.destroy', $book->id], 'method' => 'delete']) !!}
                             <p class="msr_btn17">
@@ -19,6 +20,8 @@
                         {!! Form::close() !!}
                     </div>
                 @endforeach
+                {{-- ページネーションのリンク --}}
+                {{ $books->links() }}
               </div>
             </div>                
     </section>

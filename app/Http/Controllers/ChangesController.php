@@ -15,10 +15,12 @@ class ChangesController extends Controller
     {
         // idの値でchangeを検索して取得
         $change = \App\Change::findOrFail($id);
+        $checklist = $change->checklist;
         $book = $change->checklist->book;
         // 本情報詳細ビューでそれを表示
         return view('users.show', [
             'change' => $change,
+            'checklist' => $checklist,
             'book' => $book,
         ]);
     }
@@ -41,17 +43,13 @@ class ChangesController extends Controller
         $request->validate([
             'now' => 'required|max:255',
             'future' => 'required|max:255',
-            'effect' => 'required|max:255',
-            'why' => 'required|max:255',
-            'result' => 'required|max:255',
+
         ]);
         $change = new Change();
         $change->checklist_id = $request->checklist_id;
         $change->now = $request->now;
         $change->future = $request->future;
-        $change->effect = $request->effect;
-        $change->why = $request->why;
-        $change->result = $request->result;
+
         $change->save();
         // トップページへリダイレクトさせる
         return redirect('/');
@@ -62,12 +60,14 @@ class ChangesController extends Controller
     {
         // idの値でchangeを検索して取得
         $change = \App\Change::findOrFail($id);
+        $checklist = \App\Checklist::findOrFail($id);
         $book = $change->checklist->book;
         // 認証済みユーザ（閲覧者）がその本情報の所有者である場合は、
         if (\Auth::id() === $book->user_id) {
         // 本情報編集ビューでそれを表示
         return view('users.edit', [
             'book' => $book,
+            'checklist' => $checklist,
             'change' => $change,
         ]);
         }
@@ -85,17 +85,17 @@ class ChangesController extends Controller
             'image'=>'required',
             'title' => 'required|max:255',
             'auther' => 'required|max:255',
+            'checklist' => 'required|max:255',
             'now' => 'required|max:255',
             'future' => 'required|max:255',
-            'effect' => 'required|max:255',
-            'why' => 'required|max:255',
-            'result' => 'required|max:255',
         ]);
         
         // idの値でchangeを検索して取得
         $change = \App\Change::findOrFail($id);
+        $checklist = \App\Checklist::findOrFail($id);
         $book = \App\Book::findOrFail($id);
         
+        $checklist = $change->checklist;
         $book = $change->checklist->book;
         // 認証済みユーザ（閲覧者）がその本情報の所有者である場合は、
         if (\Auth::id() === $book->user_id) {
@@ -115,13 +115,12 @@ class ChangesController extends Controller
         if ($request->has('auther')) {
         $book->auther = $request->auther;
         }
+        $checklist->checklist = $request->checklist;
         $change->now = $request->now;
         $change->future = $request->future;
-        $change->effect = $request->effect;
-        $change->why = $request->why;
-        $change->result = $request->result;
         
         $book->save();
+        $checklist->save();
         $change->save();
         }
 
@@ -135,9 +134,17 @@ class ChangesController extends Controller
     {
         // idの値で本情報を検索して取得
         $change = \App\Change::findOrFail($id);
+        $checklist = \App\Checklist::findOrFail($id);
+        $book = \App\Book::findOrFail($id);
+
+        $checklist = $change->checklist;
+        $book = $change->checklist->book;
 
         // 本情報を削除
         $change->delete();
+        $checklist->delete();
+        $book->delete();
+        
 
         // トップページへリダイレクトさせる
         return redirect('/');

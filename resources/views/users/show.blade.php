@@ -1,52 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-        <div class="class="offset-md-4 col-md-6">
-                  <img src="{{ $book->image_path }}" width="60%">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="row">本のタイトル</th>
-                  <td scope="row">{{ $book->title }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">本の著者</th>
-                  <td>{{ $book->auther }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">感銘を受けたこと</th>
-                  <td>{{ $change->why }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">今の自分</th>
-                  <td>{{ $change->now }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">目標</th>
-                  <td>{{ $change->future }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">期待される効果</th>
-                  <td>{{ $change->effect }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">行動した結果</th>
-                  <td>{{ $change->result }}</td>
-                </tr>
-              </tbody> 
-            </table>
-        </div>
-        
-            {{-- 本情報、追加情報編集ページへのリンク --}}
-            <p class="msr_btn16">
-            {!! link_to_route('changes.edit', '編集', ['change' => $change->id], []) !!}
-            </p>
-
-            {{-- 本情報削除フォーム --}}
-            {!! Form::model($change, ['route' => ['changes.destroy', $change->id], 'method' => 'delete']) !!}
-            <p class="msr_btn17">
-            <input type="submit" value="削除">
-            </p>
-            {!! Form::close() !!}
-  
+@include('commons.change_infomation')
+  {{-- 本情報、追加情報編集ページへのリンク --}}
+  <p class="msr_btn16">
+  {!! link_to_route('changes.edit', '編集', ['change' => $change->id], []) !!}
+  </p>
+  {{-- 本情報削除フォーム --}}
+  {!! Form::model($change, ['route' => ['changes.destroy', $change->id], 'method' => 'delete']) !!}
+  <p class="msr_btn17">
+  <input type="submit" value="削除">
+  </p>
+  {!! Form::close() !!}
 @endsection

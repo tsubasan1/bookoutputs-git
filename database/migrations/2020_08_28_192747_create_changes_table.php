@@ -18,9 +18,9 @@ class CreateChangesTable extends Migration
             $table->unsignedBigInteger('checklist_id');
             $table->string('now');
             $table->string('future');
-            $table->string('effect');
-            $table->string('why');
-            $table->string('result');
+            //$table->string('effect');
+            //$table->string('why');
+            //$table->string('result');
             $table->timestamps();
 
             // 外部キー制約

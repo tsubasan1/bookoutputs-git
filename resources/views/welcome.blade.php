@@ -14,35 +14,31 @@
 @if (Auth::check())
 <body class="full-page">
     <section id="main">
-      <img src="{{ asset('image/usertop.jpeg') }}" width="60%">
-      <h2>本情報を作成する</h2>
+      <!--<img src="{{ asset('image/usertop.jpeg') }}" width="60%" height"60%">-->
+      <h1></h1>
+      <h2>私の読んだ本を、記録する</h2>
           <p class="msr_btn13">
-              {{-- 本情報作成ページへのリンク --}}
-              {!! link_to_route('books.create', 'こんな本、読むよ。', [] , [])!!}
+              {{-- 本の情報作成ページへのリンク --}}
+              {!! link_to_route('books.create', '私こんな本、読んだよ。', [] , [])!!}
           </p>
-      <h2>リストを作成する</h2>
+          <!--<h2>読んだ感動を、記録する</h2>
           <p class="msr_btn13">
               {{-- リスト作成ページへのリンク --}}
-              {!! link_to_route('newbooks.index2', '自分のどこ、変えようかな。', [] , [])!!}
-          </p>
-      <h2>リストを選択する</h2>
-          <p class="msr_btn13">
-              {{-- リスト選択ページへのリンク 本情報の取得--}}
-              {!! link_to_route('checklists.index', '自分のここ、変えるよ。', [] , [])!!}
-          </p>
+              {!! link_to_route('newbooks.index2', '私はここに、感動したよ。', [] , [])!!}
+          </p>-->
 
-      <h2>ユーザーの投稿一覧</h2>
+      <h2>私の投稿一覧</h2>
       <h3>行動を変える読書</h3>
                 
   <div class="content-1">
     <div class="row">
       @foreach($books as $book)
-        @foreach($book->checklists as $checklist)
-          @foreach($checklist->changes as $change)
-          <div class="offset-md-1 col-md-4">
-            <img src="{{ $book->image_path }}" width="60%">
+          <div class="col-md-6">
               <table class="table">
                 <thead>
+                  <tr>
+                    <th colspan="2"><img src="{{ $book->image_path }}" width="60%" height"60%"></td>
+                  </tr>
                   <tr>
                     <th scope="row">本のタイトル</th>
                     <td scope="row">{{ $book->title }}</td>
@@ -52,33 +48,46 @@
                     <td>{{ $book->auther }}</td>
                   </tr>
                   <tr>
-                    <th scope="row">感銘を受けたこと</th>
-                    <td>{{ $change->why }}</td>
+                  <tr>
+                    <th scope="row"></th>
+                    <th>{!! link_to_route('books.show', '私の感動を記録する。', ['book' => $book->id])!!}</td>
+                  </tr>
+        @foreach($book->checklists as $checklist)
+                    <th scope="row">私の感動</th>
+                    <td>{{ $checklist->checklist }}</td>
                   </tr>
                   <tr>
-                    <th scope="row">今の自分</th>
+                    <th scope="row"></th>
+                    <th>{!! link_to_route('checklists.show', '今後の目標を決める。', ['checklist' => $checklist->id])!!}</td>
+                  </tr>
+                
+          @foreach($checklist->changes as $change)
+                
+                  <tr>
+                    <th scope="row">今後の目標</th>
                     <td>{{ $change->now }}</td>
                   </tr>
                   <tr>
-                    <th scope="row">目標</th>
+                    <th scope="row">具体的な解決策</th>
                     <td>{{ $change->future }}</td>
                   </tr>
                   <tr>
-                    <th scope="row">期待される効果</th>
-                    <td>{{ $change->effect }}</td>
+                    <th scope="row"></th>
+                    <th>{!! link_to_route('changes.show', '編集する。', ['change' => $change->id])!!}</td>
                   </tr>
-                  <tr>
-                    <th scope="row">行動した結果</th>
-                    <td>{{ $change->result }}</td>
-                  </tr>
+
                 </tbody> 
-              </table>
-                  {{-- 詳細ページへのリンク --}}
-                  {!! link_to_route('changes.show', '詳細ページへ', ['change' => $change->id]) !!}
-          </div>
+
+                    {{-- 本情報追加へのリンク--}}
           @endforeach
         @endforeach
+                    
+              </table>
+          </div>
+
       @endforeach
+                {{-- ページネーションのリンク --}}
+                {{ $books->links() }}
     </div>
   </div>
 @else
@@ -92,12 +101,12 @@
         <div class="content-1">
           <div class="row">
             @foreach($books as $book)
-              @foreach($book->checklists as $checklist)
-                @foreach($checklist->changes as $change)
-                <div class="offset-md-1 col-md-4">
-                  <img src="{{ $book->image_path }}" width="60%">
+                <div class="col-md-6">
                     <table class="table">
                       <thead>
+                        <tr>
+                          <th colspan="2"><img src="{{ $book->image_path }}" width="60%" height"60%"></td>
+                        </tr>
                         <tr>
                           <th scope="row">本のタイトル</th>
                           <td scope="row">{{ $book->title }}</td>
@@ -106,32 +115,28 @@
                           <th scope="row">本の著者</th>
                           <td>{{ $book->auther }}</td>
                         </tr>
+              @foreach($book->checklists as $checklist)
                         <tr>
-                          <th scope="row">感銘を受けたこと</th>
-                          <td>{{ $change->why }}</td>
+                          <th scope="row">私の感動</th>
+                          <td>{{ $checklist->checklist }}</td>
                         </tr>
+                @foreach($checklist->changes as $change)
                         <tr>
-                          <th scope="row">今の自分</th>
+                          <th scope="row">今後の目標</th>
                           <td>{{ $change->now }}</td>
                         </tr>
                         <tr>
-                          <th scope="row">目標</th>
+                          <th scope="row">具体的な解決策</th>
                           <td>{{ $change->future }}</td>
                         </tr>
-                        <tr>
-                          <th scope="row">期待される効果</th>
-                          <td>{{ $change->effect }}</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">行動した結果</th>
-                          <td>{{ $change->result }}</td>
-                        </tr>
                       </tbody> 
-                    </table>
-            </div>
                 @endforeach
               @endforeach
+                    </table>
+                </div>
             @endforeach
+                {{-- ページネーションのリンク --}}
+                {{ $books->links() }}
           </div>
         </div>
 
